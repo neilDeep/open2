@@ -1,21 +1,21 @@
 angular.module('open2-Services',[])
   /// factory for get/post requests
-    .factory('Services', function($http, $location) {
+    .factory('Services', function($http, $state) {
       var username;
 
    // login
    var login = function(user) {
-     console.log('services username inside signup', username);
+     console.log('user.username: ', user.username);
      return $http({
        method: 'POST',
        url: 'http://localhost:8080/index/homepage',
        data: user
      })
      .then(function(resp){
-       $location.path('/dashboard');
+       $state.go('dashboard');
      })
      .catch(function(err){
-       $location.path('/');
+       $state.go('home');
        console.log(err);
      })
    };
@@ -23,7 +23,7 @@ angular.module('open2-Services',[])
   // logout
 
   var logout = function(){
-    $location.path('/');
+    $state.go('home');
   };
 
 
@@ -36,10 +36,10 @@ angular.module('open2-Services',[])
       data: user
     })
     .then(function(resp){
-      $location.path('/login');
+      $state.go('home');
     })
     .catch(function(err){
-      $location.path('/');
+      $state.go('home');
       console.log(err);
     })
   };
@@ -68,7 +68,7 @@ angular.module('open2-Services',[])
       console.log("Sent the Messages", data);
     })
     .catch(function(err){
-      $location.path('/');
+      $state.go('home');
       console.log(err);
     })
   };
@@ -86,7 +86,7 @@ angular.module('open2-Services',[])
   };
 
      // get freinds list
-     var uploadFriendslist = function() {
+     var uploadFriendsList = function() {
        return $http ({
          method: 'GET',
          url: 'http://localhost:8080/dashboard/friends'
@@ -122,7 +122,7 @@ angular.module('open2-Services',[])
      signup: signup,
      logout: logout,
      username: username,
-     uploadFriendslist: uploadFriendslist,
+     uploadFriendsList: uploadFriendsList,
      joinEvent: joinEvent,
      unjoinEvent: unjoinEvent
    };

@@ -4,26 +4,28 @@ angular.module('myApp', [
   'ngMessages',
   'authentication-module',
   'dashboard-module',
-  'open2-Services'
+  'open2-Services',
+  'ui.router'
 ])
 
 //route config
-.config(function($routeProvider, $mdThemingProvider) {
-  $routeProvider
-  .when("/", {
+.config(function($urlRouterProvider, $stateProvider, $mdThemingProvider) {
+  $urlRouterProvider.otherwise('/'); // https://www.youtube.com/watch?v=QETUuZ27N0w
+  $stateProvider
+  .state('home',{
+    url: '/',
     templateUrl: './authentication/login.html',
     controller: 'loginCtrl'
   })
-  .when('/dashboard', {
+  .state('dashboard',{
+    url: '/dashboard',
     templateUrl: './dashboard/dashboard.html',
     controller: 'dashboardCtrl'
   })
-  .when('/signup', {
+  .state('signup', {
+    url: '/signup',
     templateUrl: './authentication/signup.html',
     controller: 'signupCtrl'
-  })
-  .otherwise({
-    redirectTo: '/'
   });
   $mdThemingProvider.definePalette('Open2Pallete', {
     '50': 'FFBC4F',
