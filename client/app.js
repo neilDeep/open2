@@ -5,20 +5,22 @@ angular.module('myApp', [
   'authentication-module',
   'dashboard-module',
   'open2-Services'
-]);
+])
 
 //route config
 .config(function($routeProvider, $mdThemingProvider) {
   $routeProvider
   .when("/", {
-    templateUrl: 'login.html',
+    templateUrl: './authentication/login.html',
     controller: 'loginCtrl'
   })
   .when('/dashboard', {
-    templateUrl: 'dashboard.html'
+    templateUrl: './dashboard/dashboard.html',
+    controller: 'dashboardCtrl'
   })
   .when('/signup', {
-    templateUrl: 'signup.html'
+    templateUrl: './authentication/signup.html',
+    controller: 'signupCtrl'
   })
   .otherwise({
     redirectTo: '/'
@@ -68,6 +70,7 @@ angular.module('myApp', [
     return items.slice().reverse();
   };
 })
+
 
 // controller handles styling
 .controller('AppCtrl', function ($scope, $timeout, Services, $mdSidenav, $log) {
