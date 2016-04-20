@@ -86,7 +86,7 @@ angular.module('open2-Services',[])
   };
 
      // get freinds list
-     var uploadFriendslist = function() {
+     var Friendslist = function() {
        return $http ({
          method: 'GET',
          url: 'http://localhost:8080/dashboard/friends'

@@ -64,17 +64,14 @@ var addUserEvents = function(creator, eventId, status){
 }
 
 router.get('/upload', function(request, response){
-
   db.query('SELECT Users.username, Events.eventname, Events.timestamp, UserEvents.id, UserEvents.created_by FROM Users INNER JOIN UserEvents ON Users.id = UserEvents.user_id INNER JOIN Events ON Events.id = UserEvents.event_id ORDER BY event_id', function(err, rows){
     if(err){
       throw err;
     }else{
       console.log("query from database", rows);
       response.send(rows);
-
     }
   })
-
 })
 
 router.get('/friends', function(request, response){
@@ -105,7 +102,17 @@ router.post('/join', function(request, response){
         }else{
           console.log("INSIDE POST USEREVENts", rows[0].event_id);
           var eventId = rows[0].event_id;
-          addUserEvents(userId, eventId, false);
+
+          db.query('SELECT * FROM UserEvents WHERE `user_id` = ? AND `event_id` = ?;', [userId, eventId], function(err, rows) {
+            if(err) {
+              throw err;
+            } else if (rows.length >= 1){
+              console.log("You have already joined this event!");
+              response.send(true)
+            } else {
+              addUserEvents(userId, eventId, false);
+            }
+          })
         }
       })
     }
