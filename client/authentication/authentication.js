@@ -1,7 +1,7 @@
 angular.module('authentication-module', [])
-  .controller('loginCtrl', function($scope, Services, $location) {
+  .controller('loginCtrl', function($scope, Services, $state) {
       $scope.redirectSignup = function() {
-        $location.path('/signup');
+        $state.go('signup');
       };
       $scope.submit = function() {
         var user = {

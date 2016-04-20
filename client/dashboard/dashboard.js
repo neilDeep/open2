@@ -72,7 +72,7 @@ angular.module('dashboard-module', [])
 
     };
 
-    Services.uploadFriendslist()
+    Services.uploadFriendsList()
     .then(function(data){
       //console.log("friendslist i got from server ", data.data)
       $scope.friends = data.data;
