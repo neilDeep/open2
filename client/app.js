@@ -5,7 +5,8 @@ angular.module('myApp', [
   'authentication-module',
   'dashboard-module',
   'open2-Services',
-  'ui.router'
+  'ui.router',
+  'firebase'
 ])
 
 //route config
