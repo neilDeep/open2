@@ -24,6 +24,7 @@ angular.module('authentication-module', ['firebase'])
                if(error) {
                  throw error
                } else {
+                 console.log(authData);
                  $state.go('dashboard');
                }
              })

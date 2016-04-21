@@ -79,12 +79,12 @@ router.get('/upload', function(request, response){
 
 router.post('/userProfile', function(request, response){
   var uid = request.body.id;
-  console.log("Post request came into server");
+  console.log("Post request came into server, id: ",uid);
   db.query('SELECT username FROM Users WHERE `id`= ?', [uid], function(err, results){
     if (err){
       throw err
     } else {
-      console.log("post request fore userProfile", results)
+      // console.log("post request fore userProfile", results)
       response.send(results);
     }
   })

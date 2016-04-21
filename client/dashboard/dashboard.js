@@ -1,5 +1,5 @@
-angular.module('dashboard-module', [])
-.controller('dashboardCtrl', function($scope, Services,$mdDialog, $mdMedia, $route, $sce) {
+angular.module('dashboard-module', ['firebase'])
+.controller('dashboardCtrl', function($scope, Services,$mdDialog, $mdMedia, $route, $sce, $firebaseAuth) {
   $scope.events = {};
 
       // start uploading dashboard
@@ -71,7 +71,7 @@ angular.module('dashboard-module', [])
       }
 
     };
-  
+
 
   $scope.userList = [];
   $scope.getUserNames = function(){
@@ -94,7 +94,13 @@ angular.module('dashboard-module', [])
     }
   };
 
-
+  $scope.info;
+  console.log('$scope.uid: ', $scope.uid);
+  Services.uploadUserProfile($scope.uid)
+    .then(function(data){
+      console.log(data);
+      $scope.info = data.data;
+    })
 
       //pop up dialog box
       $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
