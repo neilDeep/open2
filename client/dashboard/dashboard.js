@@ -71,12 +71,30 @@ angular.module('dashboard-module', [])
       }
 
     };
+  
 
-    Services.uploadFriendsList()
-    .then(function(data){
-      //console.log("friendslist i got from server ", data.data)
-      $scope.friends = data.data;
-    });
+  $scope.userList = [];
+  $scope.getUserNames = function(){
+    // Services.getUsernames().then(usernames){
+    //   usernames.data.usernames.forEach(function(name){
+    //     $scope.userList.push(name);
+    //   })
+    // }
+  }
+  $scope.getUserNames();
+
+
+  $scope.searchBarShown = false;
+
+  $scope.showSearchBar = function(){
+    if($scope.searchBarShown === false){
+      $scope.searchBarShown = true;
+    } else {
+      $scope.searchBarShown = false;
+    }
+  };
+
+
 
       //pop up dialog box
       $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
