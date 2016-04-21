@@ -7,7 +7,13 @@
       <h1 style="font-size: 30px; font-weight: bold;" class = "open" ng-click="toggleLeft()"> Open2</h2>
       <span flex></span>
 
+      <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
+      <md-icon md-svg-src="../assets/search.svg"></md-icon>
+      </md-button>
+      <span ng-show="searchBarShown"> <input type="text"></input></span>
       <md-button class="md-warn md-raised md-hue-2" ng-click="logout()">logout</md-button>
+
+
      </div>
    </md-toolbar>
 </div>

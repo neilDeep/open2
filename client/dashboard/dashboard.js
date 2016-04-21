@@ -72,6 +72,17 @@ angular.module('dashboard-module', [])
 
     };
 
+
+  $scope.searchBarShown = false;
+
+  $scope.showSearchBar = function(){
+    if($scope.searchBarShown === false){
+      $scope.searchBarShown = true;
+    } else {
+      $scope.searchBarShown = false;
+    }
+  };
+
     Services.uploadFriendsList()
     .then(function(data){
       //console.log("friendslist i got from server ", data.data)
