@@ -10,7 +10,13 @@
       <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
       <md-icon md-svg-src="../assets/search.svg"></md-icon>
       </md-button>
-      <span ng-show="searchBarShown"> <input type="text"></input></span>
+      <span ng-show="searchBarShown"> 
+        <input type="text" ng-model='userNameYouWant'></input><br>
+        <!-- <div ng-repeat="name in userList | filter:userNameYouWant"> -->
+        <!-- <div>{{name}}</div> -->
+        <!-- <span><img src = ***ADD FRIEND BUTTON***/></span><br> -->
+        <!-- <div> -->
+      </span>
       <md-button class="md-warn md-raised md-hue-2" ng-click="logout()">logout</md-button>
 
 

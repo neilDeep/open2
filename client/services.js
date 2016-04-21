@@ -71,13 +71,13 @@ angular.module('open2-Services',[])
 
   };
 
-     // get freinds list
-     var uploadFriendsList = function() {
-       return $http ({
-         method: 'GET',
-         url: 'http://localhost:8080/dashboard/friends'
-       });
-     };
+     // get freinds list COMMENTED OUT: A.K 12:53AM THURS
+     // var uploadFriendsList = function() {
+     //   return $http ({
+     //     method: 'GET',
+     //     url: 'http://localhost:8080/dashboard/friends'
+     //   });
+     // };
 
 
    // add a record to database when user joins an event
@@ -100,6 +100,13 @@ angular.module('open2-Services',[])
 
    };
 
+   var getUsernames = function(){
+     return $http({
+       method: 'GET',
+       url: 'http://localhost:8080/dashboard/getUsernames',
+     });
+   }
+
    return {
      login: login,
      uploadDashboard: uploadDashboard,
@@ -108,9 +115,9 @@ angular.module('open2-Services',[])
      signup: signup,
      logout: logout,
      username: username,
-     uploadFriendsList: uploadFriendsList,
      joinEvent: joinEvent,
-     unjoinEvent: unjoinEvent
+     unjoinEvent: unjoinEvent,
+     getUsernames: getUsernames
    };
 
  });
