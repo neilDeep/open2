@@ -1,7 +1,21 @@
 angular.module('dashboard-module', ['firebase'])
-.controller('dashboardCtrl', function($scope, Services,$mdDialog, $mdMedia, $route, $sce, $firebaseAuth) {
+.controller('dashboardCtrl', function($scope, Services,$mdDialog, $mdMedia, $route, $sce, $firebaseAuth, $state) {
   $scope.events = {};
 
+  $scope.ref = new Firebase("https://fiery-inferno-8987.firebaseio.com");
+  $scope.authObj = $firebaseAuth($scope.ref);
+
+    $scope.checkAuthentication = function() {
+         $scope.authObj.$onAuth(function(authData) {
+            if (authData) {
+               $scope.uid = authData.auth.uid;
+               console.log($scope.uid);
+            } else {
+               $state.go('home');
+            }
+         })
+      }
+      $scope.checkAuthentication();
       // start uploading dashboard
       Services.uploadDashboard()
       .then(function(data){
@@ -95,7 +109,7 @@ angular.module('dashboard-module', ['firebase'])
   };
 
   $scope.info;
-  console.log('$scope.uid: ', $scope.uid);
+
   Services.uploadUserProfile($scope.uid)
     .then(function(data){
       console.log(data);
