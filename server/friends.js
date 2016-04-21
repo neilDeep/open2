@@ -7,42 +7,38 @@ var cors = require('cors');
 var app = express();
 app.use(cors());
 
+  //db.query('SELECT Users.username, Events.eventname, Events.timestamp, UserEvents.id, UserEvents.created_by
+  // FROM Users INNER JOIN UserEvents ON 
+  	//Users.id = UserEvents.user_id INNER JOIN Events ON Events.id = UserEvents.event_id ORDER BY event_id', function(err, rows){
+//
+
+// 'SELECT User.username FROM Users INNER JOIN Friends ON (`user_id1` = ? OR `user_id2` = ?)'
+
+// 'SELECT u.username FROM Users u INNER JOIN Friends f1 ON f1.user_id1=u.id INNER JOIN Friends f2 ON 
+// f2.user_id1 = f1.user_id2 AND f2.user_id2 = f1.user_id1 WHERE f2.user_id1 = ?'
 
 router.post('/', function(request, response) {
 var requestedUser = request.body.id;
-console.log(requestedUser);
-db.query('SELECT user_id1,user_id2 FROM Friends WHERE (`user_id1` = ? OR `user_id2` = ?)', [requestedUser, requestedUser],
+db.query("SELECT u.username FROM Users u INNER JOIN (SELECT f1.user_id1 AS user, f1.user_id2 AS friend FROM Friends f1 INNER JOIN Friends f2 ON (f1.user_id1 = f2.user_id2 AND f1.user_id2 = f2.user_id1)) AS friends ON u.id = friends.friend WHERE friends.user = ?", [requestedUser],
 function(err, results) {
 	if (err) {
 		throw err;
 	} else {
 		console.log("results from friend get request:", results);
-		var friendsList = [];
-		for (var i = 0; i < results.length; i++){
-			if (results[i].user_id1 === requestedUser) {
-				friendsList.push(results[i].user_id2)
-			} else {
-				friendsList.push(results[i].user_id1)
-
-			}
-		}
-		console.log(friendsList);
-		db.query('SELECT username FROM Users', function(err, results2) {
-			if (err) {
-				throw err;
-			} else {
-				console.log("friends list from db", results2);
-
-
-
-				response.send(results);
+		response.send(results);
 			}
 		})
-
-	}
 })
 
-
+router.get('/getUsernames', function(request, response){
+	db.query('SELECT username FROM Users', function(err, results) {
+		if (err) {
+			throw err;
+		} else {
+			console.log(results);
+			response.send(results);
+		}
+	})	
 })
 
 router.post('/add', function(request, response) {
@@ -62,12 +58,22 @@ router.post('/add', function(request, response) {
 					user_id2: results[1].id,
 					status: 0
 				};
-				db.query('INSERT INTO Friends SET ?', makeFriend, function(err, resultss) {
+				var makeFriend2 = {
+					user_id1: results[1].id,
+					user_id2: results[0].id,
+					status: 0
+				};
+				db.query('INSERT INTO Friends SET ?', makeFriend, function(err, results2) {
 					if (err) {
 						throw err;
 					} else {
-						console.log("Results upon successful insertion:", resultss);
+						db.query('INSERT INTO Friends SET ?', makeFriend2, function(err, results3){
+						console.log("Results upon successful insertion:", results3);
+
 						response.send("Omg the insert works");
+
+
+						})
 					}
 				})
 

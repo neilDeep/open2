@@ -33,7 +33,7 @@ angular.module('authentication-module', ['firebase'])
         });
       };
   })
-  .controller('signupCtrl', function($scope, Services) {
+  .controller('signupCtrl', function($scope, Services, $state) {
 
       $scope.submit = function() {
         var user = {
@@ -51,7 +51,7 @@ angular.module('authentication-module', ['firebase'])
              }
             })
           } else {
-            state.go('home');
+            $state.go('home');
           }
         });
       };
