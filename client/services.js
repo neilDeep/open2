@@ -78,7 +78,17 @@ angular.module('open2-Services',[])
      //     url: 'http://localhost:8080/dashboard/friends'
      //   });
      // };
-
+  var uploadUserProfile = function(id) {
+    var request = {
+      id: id
+    };
+    console.log(request);
+    return $http({
+      method: 'POST',
+      url: 'http://localhost:8080/dashboard/userProfile',
+      data: request
+    });
+  };
 
    // add a record to database when user joins an event
    var joinEvent = function(eventId) {
@@ -117,7 +127,8 @@ angular.module('open2-Services',[])
      username: username,
      joinEvent: joinEvent,
      unjoinEvent: unjoinEvent,
-     getUsernames: getUsernames
+     getUsernames: getUsernames,
+     uploadUserProfile: uploadUserProfile
    };
 
  });
