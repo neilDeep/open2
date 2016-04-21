@@ -89,13 +89,26 @@ angular.module('dashboard-module', ['firebase'])
 
   $scope.userList = [];
   $scope.getUserNames = function(){
-    // Services.getUsernames().then(usernames){
+    console.log('function running')
+    Services.getUsernames().then(function(usernames){
+      console.log('this should be usernames, usernames ', usernames)
+      usernames.data.forEach(function(name){
+        $scope.userList.push(name);
+      })
+      console.log($scope.userList);
+    })
+  }
+  $scope.getUserNames();
+
+  // $scope.friendList = [];
+  // $scope.getFriends = function(){
+    // Services.getFriends().then(usernames){
     //   usernames.data.usernames.forEach(function(name){
     //     $scope.userList.push(name);
     //   })
     // }
-  }
-  $scope.getUserNames();
+  // }
+  // $scope.getFriends();
 
 
   $scope.searchBarShown = false;
