@@ -113,9 +113,16 @@ angular.module('open2-Services',[])
    var getUsernames = function(){
      return $http({
        method: 'GET',
-       url: 'http://localhost:8080/dashboard/getUsernames',
+       url: 'http://localhost:8080/friends/getUsernames'
      });
    }
+
+  // var getFriends = function(){
+  //    return $http({
+  //      method: 'GET',
+  //      url: 'http://localhost:8080/friends'
+  //    });
+  //  }
 
    return {
      login: login,
@@ -129,6 +136,7 @@ angular.module('open2-Services',[])
      unjoinEvent: unjoinEvent,
      getUsernames: getUsernames,
      uploadUserProfile: uploadUserProfile
+     // getFriends: getFriends
    };
 
  });

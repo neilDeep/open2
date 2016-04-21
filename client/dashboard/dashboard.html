@@ -12,10 +12,10 @@
       </md-button>
       <span ng-show="searchBarShown">
         <input type="text" ng-model='userNameYouWant'></input><br>
-        <!-- <div ng-repeat="name in userList | filter:userNameYouWant"> -->
-        <!-- <div>{{name}}</div> -->
+        <div ng-repeat="name in userList | filter:userNameYouWant">
+        <div>{{name.username}}</div>
         <!-- <span><img src = ***ADD FRIEND BUTTON***/></span><br> -->
-        <!-- <div> -->
+        </div>
       </span>
       <md-button class="md-warn md-raised md-hue-2" ng-click="authObj.$unauth()">logout</md-button>
 
