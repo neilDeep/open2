@@ -13,8 +13,9 @@ router.post('/events', function(request, response) {
   var event = request.body.event;
   var timestamp = request.body.time;
   var username = request.body.username;
+  var id = request.body.id;
 
-  var events = {eventname: event, timestamp: timestamp};
+  var events = {eventname: event, timestamp: timestamp, created_by: id};
 
   //this will send a text message to the "to" user;
   //get twilio trial account to get a phone number which sends texts from "from"
@@ -51,6 +52,7 @@ router.post('/events', function(request, response) {
   });
 })
 
+
 var addUserEvents = function(creator, eventId, status){
   var userEvents = {user_id: creator, event_id: eventId, created_by: status};
   console.log(userEvents)
@@ -75,7 +77,19 @@ router.get('/upload', function(request, response){
 })
 
 
+router.post('/userProfile', function(request, response){
+  var uid = request.body.id;
+  console.log("Post request came into server");
+  db.query('SELECT username FROM Users WHERE `id`= ?', [uid], function(err, results){
+    if (err){
+      throw err
+    } else {
+      console.log("post request fore userProfile", results)
+      response.send(results);
+    }
+  })
 
+})
 router.post('/join', function(request, response){
   var username = request.body.user;
   var id = request.body.eventId;
