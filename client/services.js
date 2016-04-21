@@ -11,13 +11,6 @@ angular.module('open2-Services',[])
        url: 'http://localhost:8080/index/homepage',
        data: user
      })
-     .then(function(resp){
-       $state.go('dashboard');
-     })
-     .catch(function(err){
-       $state.go('home');
-       console.log(err);
-     })
    };
 
   // logout
@@ -34,13 +27,6 @@ angular.module('open2-Services',[])
       method: 'POST',
       url: 'http://localhost:8080/signup/newuser',
       data: user
-    })
-    .then(function(resp){
-      $state.go('home');
-    })
-    .catch(function(err){
-      $state.go('home');
-      console.log(err);
     })
   };
 
