@@ -79,14 +79,13 @@ angular.module('open2-Services',[])
      //   });
      // };
   var uploadUserProfile = function(id) {
-    var request = {
+    var uid = {
       id: id
     };
-    console.log(request);
     return $http({
       method: 'POST',
       url: 'http://localhost:8080/dashboard/userProfile',
-      data: request
+      data: uid
     });
   };
 

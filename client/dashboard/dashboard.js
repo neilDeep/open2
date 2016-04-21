@@ -4,12 +4,18 @@ angular.module('dashboard-module', ['firebase'])
 
   $scope.ref = new Firebase("https://fiery-inferno-8987.firebaseio.com");
   $scope.authObj = $firebaseAuth($scope.ref);
-
+    $scope.uid;
+    $scope.info;
     $scope.checkAuthentication = function() {
          $scope.authObj.$onAuth(function(authData) {
             if (authData) {
                $scope.uid = authData.auth.uid;
-               console.log($scope.uid);
+               console.log('$scope.uid: ',$scope.uid);
+               Services.uploadUserProfile($scope.uid)
+                .then(function(data){
+                  $scope.info = data.data;
+                  console.log('info: ',$scope.info);
+                });
             } else {
                $state.go('home');
             }
@@ -121,13 +127,6 @@ angular.module('dashboard-module', ['firebase'])
     }
   };
 
-  $scope.info;
-
-  Services.uploadUserProfile($scope.uid)
-    .then(function(data){
-      console.log(data);
-      $scope.info = data.data;
-    })
 
       //pop up dialog box
       $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
