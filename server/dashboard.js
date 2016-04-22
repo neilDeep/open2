@@ -9,13 +9,13 @@ var app = express();
 app.use(cors());
 
 router.post('/events', function(request, response) {
-  console.log('inside dashboard username', request.body.username);
+
   var event = request.body.event;
   var timestamp = request.body.time;
   var username = request.body.username;
   var id = request.body.id;
 
-  var events = {eventname: event, timestamp: timestamp, created_by: id};
+  var events = {eventname: event, timestamp: timestamp};
 
   //this will send a text message to the "to" user;
   //get twilio trial account to get a phone number which sends texts from "from"
@@ -24,7 +24,6 @@ router.post('/events', function(request, response) {
     from: '+1**********',
     body: 'I am available to ' + event + " at " + timestamp
   });
-
   db.query('INSERT INTO Events SET ?', events, function(err, results){
     if (err) {
       response.sendStatus(500);
@@ -35,15 +34,16 @@ router.post('/events', function(request, response) {
         if(err){
           throw err;
         }else{
-          response.send(rows);
 
-          db.query('SELECT * FROM Users WHERE `username` = ?;', [username], function(err, rows) {
+          response.send(rows);
+          db.query('SELECT * FROM Users WHERE `username` = ?;', [username], function(err, rows2) {
             if(err){
               throw err;
             }else{
-              var userId = rows[0].id;
+              var userId = rows2[0].id;
 
               addUserEvents(userId, eventId, true);
+
             }
           });
         }
@@ -55,7 +55,7 @@ router.post('/events', function(request, response) {
 
 var addUserEvents = function(creator, eventId, status){
   var userEvents = {user_id: creator, event_id: eventId, created_by: status};
-  console.log(userEvents)
+
   db.query('INSERT INTO UserEvents SET ?', userEvents, function(err, results){
     if (err) {
       console.log(err);
@@ -70,7 +70,7 @@ router.get('/upload', function(request, response){
     if(err){
       throw err;
     }else{
-      console.log("query from database", rows);
+
       response.send(rows);
     }
   })
@@ -79,7 +79,6 @@ router.get('/upload', function(request, response){
 
 router.post('/userProfile', function(request, response){
   var uid = request.body.id;
-  console.log("Post request came into server, id: ",uid);
   db.query('SELECT username FROM Users WHERE `id`= ?', [uid], function(err, results){
     if (err){
       throw err
@@ -98,21 +97,21 @@ router.post('/join', function(request, response){
     if(err){
       throw err;
     }else{
-      console.log("INSIDE JOIN POST",rows[0].id);
+
       var userId = rows[0].id;
 
       db.query('SELECT event_id FROM UserEvents WHERE `id` = ?;', [id],function(err, rows){
         if(err){
           throw err;
         }else{
-          console.log("INSIDE POST USEREVENts", rows[0].event_id);
+
           var eventId = rows[0].event_id;
 
           db.query('SELECT * FROM UserEvents WHERE `user_id` = ? AND `event_id` = ?;', [userId, eventId], function(err, rows) {
             if(err) {
               throw err;
             } else if (rows.length >= 1){
-              console.log("You have already joined this event!");
+
               response.send(true)
             } else {
               addUserEvents(userId, eventId, false);

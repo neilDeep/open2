@@ -63,6 +63,7 @@ angular.module('open2-Services',[])
      // new event request
      var eventsPost = function(eventInfo) {
     //console.log('eventinfo inside events post', eventInfo);
+    console.log("INSIDE EVENT POST SERVICES", eventInfo);
     return $http({
       method: 'POST',
       url: 'http://localhost:8080/dashboard/events',
@@ -71,13 +72,6 @@ angular.module('open2-Services',[])
 
   };
 
-     // get freinds list COMMENTED OUT: A.K 12:53AM THURS
-     // var uploadFriendsList = function() {
-     //   return $http ({
-     //     method: 'GET',
-     //     url: 'http://localhost:8080/dashboard/friends'
-     //   });
-     // };
   var uploadUserProfile = function(id) {
     var uid = {
       id: id
@@ -116,12 +110,21 @@ angular.module('open2-Services',[])
      });
    }
 
-  // var getFriends = function(){
-  //    return $http({
-  //      method: 'GET',
-  //      url: 'http://localhost:8080/friends'
-  //    });
-  //  }
+  var addFriend = function(uid, username){
+    var adding = {
+      id: uid,
+      username2: username
+    }
+    return $http.post('/friends/add', adding);
+   }
+
+   var getFriends = function(uid){
+    console.log("THIS IS THE UID THAT WE NEED PLZ THANKZ", uid);
+    var gettingFriends = {
+      id: uid
+    }
+    return $http.post('/friends', gettingFriends);
+   }
 
    return {
      login: login,
@@ -134,8 +137,9 @@ angular.module('open2-Services',[])
      joinEvent: joinEvent,
      unjoinEvent: unjoinEvent,
      getUsernames: getUsernames,
-     uploadUserProfile: uploadUserProfile
-     // getFriends: getFriends
+     uploadUserProfile: uploadUserProfile,
+     addFriend: addFriend,
+     getFriends: getFriends
    };
 
  });
