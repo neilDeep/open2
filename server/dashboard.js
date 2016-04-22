@@ -83,7 +83,7 @@ router.post('/userProfile', function(request, response){
     if (err){
       throw err
     } else {
-      // console.log("post request fore userProfile", results)
+      console.log("post request fore userProfile", results)
       response.send(results);
     }
   })

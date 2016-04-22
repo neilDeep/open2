@@ -7,7 +7,7 @@ angular.module('myApp', [
   'open2-Services',
   'ui.router',
   'firebase',
-  'base64'
+  'naif.base64'
 ])
 
 //route config
