@@ -50,24 +50,22 @@
       </md-sidenav>
 
       <md-content flex layout-padding ng-controller="dashboardCtrl">
-        <div layout="column" layout-fill layout-align="top center" ng-show="showChat">
+        <div ng-show="showChat">
           <!-- button start -->
-          <div class="md-padding" id="popupContainer" ng-cloak>
+          <div class="md-padding" class="chatRoom" ng-cloak>
             <div>
               <h1>Chatroom</h1>
             </div>
             <div>
-              <label>Message:</label>
-              <input ng-model="msg" ng-keydown="newMessage($event)" type="text" id="messageInput"  placeholder="Type a message...">
-            </div>
-            <div>
-              <p>Messages will populate here</p>
-              <ul>
+              <ul class="chatMsg">
                 <li ng-repeat="msg in messages">
                   <strong>{{msg.from}}: </strong>{{msg.body}}
                 </li>
               </ul>
             </div>
+          </div>
+          <div>
+            <input ng-model="msg" ng-keydown="newMessage($event)" type="text" id="messageInput"  placeholder="Type a message...">
           </div>
         </div>
 
