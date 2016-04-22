@@ -10,18 +10,20 @@ angular.module('dashboard-module', ['firebase'])
     $scope.authObj.$onAuth(function(authData) {
       if (authData) {
         $scope.uid = authData.auth.uid;
-        console.log('$scope.uid: ',$scope.uid);
+          $scope.getFriends($scope.uid);
+
         Services.uploadUserProfile($scope.uid)
         .then(function(data){
+          console.log("yes its working")
           $scope.info = data.data;
-          console.log('info: ',$scope.info);
+
+
         });
       } else {
         $state.go('home');
       }
     })
   }
-  $scope.checkAuthentication();
   // start uploading dashboard
   Services.uploadDashboard()
   .then(function(data){
@@ -115,26 +117,40 @@ angular.module('dashboard-module', ['firebase'])
 
     $scope.userList = [];
     $scope.getUserNames = function(){
-      console.log('function running')
       Services.getUsernames().then(function(usernames){
-        console.log('this should be usernames, usernames ', usernames)
         usernames.data.forEach(function(name){
           $scope.userList.push(name);
         })
-        console.log($scope.userList);
+
       })
     }
     $scope.getUserNames();
 
-    // $scope.friendList = [];
-    // $scope.getFriends = function(){
-    // Services.getFriends().then(usernames){
-    //   usernames.data.usernames.forEach(function(name){
-    //     $scope.userList.push(name);
-    //   })
-    // }
-    // }
-    // $scope.getFriends();
+
+    $scope.addFriend = function(username){
+    Services.addFriend($scope.uid, username).then(function(usernames){
+
+          alert("you added " + username);
+$state.reload();
+
+
+      })
+    }
+    
+
+    $scope.myFriends = [];
+    $scope.getFriends = function(uid){
+      Services.getFriends(uid).then(function(friends){
+
+          console.log("hi")
+         friends.data.forEach(function(name){
+          $scope.myFriends.push(name);
+         })
+         console.log("my Friends", $scope.myFriends)
+      })
+    }
+  
+  $scope.checkAuthentication();
 
 
     $scope.searchBarShown = false;
@@ -177,12 +193,12 @@ angular.module('dashboard-module', ['firebase'])
         'time' : $scope.time.value,
         'username': localStorage.getItem('username')
       }
-
+      console.log(eventInfo);
 
       Services.eventsPost(eventInfo)
       .then(function(respData){
         //console.log('i got this back from server/database', respData);
-        $route.reload(); //
+          console.log("addEvent Promiss returning", respData);
       });
     };
   });
