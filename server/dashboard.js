@@ -79,7 +79,7 @@ router.get('/upload', function(request, response){
 
 router.post('/userProfile', function(request, response){
   var uid = request.body.id;
-  db.query('SELECT username FROM Users WHERE `id`= ?', [uid], function(err, results){
+  db.query('SELECT username, picture FROM Users WHERE `id`= ?', [uid], function(err, results){
     if (err){
       throw err
     } else {
