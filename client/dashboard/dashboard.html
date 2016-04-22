@@ -24,7 +24,7 @@
         <md-toolbar class="md-theme-indigo" ng-controller="LeftCtrl">
           <h3>Your Friends</h3>
           <div ng-repeat="friend in myFriends">
-          <div>{{friend.username}}</div>
+            <div>{{friend.username}}</div>
           </div>
           <h3 class= "open">Friends</h3>
           <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
@@ -49,13 +49,12 @@
         </md-content>
       </md-sidenav>
 
-      <md-content flex layout-padding>
-        <div layout="column" layout-fill layout-align="top center">
-
+      <md-content flex layout-padding ng-controller="dashboardCtrl">
+        <div layout="column" layout-fill layout-align="top center" ng-show="showChat">
           <!-- button start -->
-          <div ng-controller="dashboardCtrl" class="md-padding" id="popupContainer" ng-cloak>
+          <div class="md-padding" id="popupContainer" ng-cloak>
             <div>
-              <h1>Chatroom header</h1>
+              <h1>Chatroom</h1>
             </div>
             <div>
               <label>Message:</label>
@@ -73,13 +72,13 @@
         </div>
 
         <!-- notification Box -->
-        <div id = 'eventContainer' ng-controller="SubheaderAppCtrl" layout="column" flex layout-fill ng-cloak>
+        <div id = 'eventContainer' layout="column" flex layout-fill ng-cloak>
           <md-toolbar>
             <div class="md-toolbar-tools open" style="font-size: 30px;">Hangouts</div>
             <md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex class="md-warn"> new event</md-button>
           </md-toolbar>
           <md-content md-theme="altTheme">
-            <div ng-controller='dashboardCtrl'>
+            <div>
               <div ng-if='events.fetch'>
                 <ul flex id = 'eventsList' class = 'font'>
                   <h4 class = 'open'>Available</h4>
@@ -94,7 +93,8 @@
                   <li ng-repeat="event in events.eventsIgoTo | reverse" style = "list-style: none">
                     <span style = "font-weight: bold" class = 'font' > I want to {{ event.eventname}} </span>
                     <span> {{event.timestamp.slice(11, 19)}}  </span>
-                    <md-button   ng-click="join(event.id, event.status)" class="md-warn md-raised md-hue-2 font"> {{event.status}}</md-button>
+                    <md-button ng-click="join(event.id, event.status)" class="md-warn md-raised md-hue-2 font"> {{event.status}}</md-button>
+                    <md-button ng-click="displayChat()" class="md-warn md-raised md-hue-2 font">Chat</md-button>
                   </li>
                 </ul>
               </div>
