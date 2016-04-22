@@ -39,24 +39,24 @@ h1 {
 }
 
 #eventContainer {
-position: relative;
-float: right;
+  position: relative;
+  float: right;
 
 }
 #eventsIgoTo {
   width : 48%;
-   border: 1px solid black;
+  border: 1px solid black;
 
   float: right;
- padding: 30px;
+  padding: 30px;
 
 
 }
 
 /*#eventsList {
 
-  border: 1px solid black;
-  float: left;
+border: 1px solid black;
+float: left;
 }
 */
 #eventsList {
@@ -139,6 +139,15 @@ float: right;
   border-radius: 4px;
 }
 
+.chatRoom {
+  border: 1px solid black;
+}
+
+.chatMsg{
+  height: 200px;
+  overflow: auto;
+}
+
 .link {
   text-decoration: none;
   color: #C6C6C6;
@@ -204,43 +213,43 @@ float: right;
 
 .dialogdemoBasicUsage #popupContainer {
   position: relative; }
-.dialogdemoBasicUsage .footer {
-  width: 100%;
-  text-align: center;
-  margin-left: 20px; }
-.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
-  font-size: 0.8em;
-  margin-top: 50px; }
-.dialogdemoBasicUsage button {
-  width: 200px; }
-.dialogdemoBasicUsage div#status {
-  color: #c60008; }
-
-  .datepickerdemoBasicUsage {
-  /** Demo styles for mdCalendar. */ }
-  .datepickerdemoBasicUsage md-content {
-    padding-bottom: 200px; }
-  .datepickerdemoBasicUsage .validation-messages {
-    font-size: 12px;
-    color: #dd2c00;
-    margin: 10px 0 0 25px; }
-
-  #searchFriends{
-  background-color: white;
-}
-.profilePic {
-    border-radius: 50%;
-    height: 45%;
+  .dialogdemoBasicUsage .footer {
     width: 100%;
-}
-#logo {
-  font-size: 50px;
-}
- #base {
-  background-color: gray;
- }
+    text-align: center;
+    margin-left: 20px; }
+    .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+      font-size: 0.8em;
+      margin-top: 50px; }
+      .dialogdemoBasicUsage button {
+        width: 200px; }
+        .dialogdemoBasicUsage div#status {
+          color: #c60008; }
 
-#userResult {
-  margin-top: 5px;
-  border: black 2px;
-}
+          .datepickerdemoBasicUsage {
+          /** Demo styles for mdCalendar. */ }
+          .datepickerdemoBasicUsage md-content {
+            padding-bottom: 200px; }
+            .datepickerdemoBasicUsage .validation-messages {
+              font-size: 12px;
+              color: #dd2c00;
+              margin: 10px 0 0 25px; }
+
+              #searchFriends{
+                background-color: white;
+              }
+              .profilePic {
+                border-radius: 50%;
+                height: 45%;
+                width: 100%;
+              }
+              #logo {
+                font-size: 50px;
+              }
+              #base {
+                background-color: gray;
+              }
+
+              #userResult {
+                margin-top: 5px;
+                border: black 2px;
+              }
