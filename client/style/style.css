@@ -236,3 +236,11 @@ float: right;
 #logo {
   font-size: 50px;
 }
+ #base {
+  background-color: gray;
+ }
+
+#userResult {
+  margin-top: 5px;
+  border: black 2px;
+}
