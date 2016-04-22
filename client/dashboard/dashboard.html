@@ -7,16 +7,6 @@
       <h1 style="font-size: 30px; font-weight: bold;" class = "open" ng-click="toggleLeft()">Profile</h2>
       <span flex></span>
 
-      <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
-      <md-icon md-svg-src="../assets/search.svg"></md-icon>
-      </md-button>
-      <span ng-show="searchBarShown">
-        <input type="text" ng-model='userNameYouWant'></input><br>
-        <div ng-repeat="name in userList | filter:userNameYouWant">
-        <div>{{name.username}}</div>
-        <!-- <span><img src = ***ADD FRIEND BUTTON***/></span><br> -->
-        </div>
-      </span>
       <md-button class="md-warn md-raised md-hue-2" ng-click="authObj.$unauth()">logout</md-button>
 
 
@@ -31,11 +21,22 @@
   <md-toolbar class="md-theme-indigo" ng-controller="LeftCtrl">
      <h3 class='open' ng-click="close()">{{info[0].username}}</h3>
   </md-toolbar>
+  
   <br>
     <img class="profilePic" src='../assets/default.jpg' alt='Profile Picture'>
   <br>
   <md-toolbar class="md-theme-indigo" ng-controller="LeftCtrl">
      <h3 class= "open">Friends</h3>
+      <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
+      <md-icon md-svg-src="../assets/search.svg"></md-icon>
+      </md-button>
+      <span ng-show="searchBarShown">
+        <span><input type="text" ng-model='userNameYouWant'></input><span>
+        <div  ng-repeat="name in userList | filter:userNameYouWant">
+        <span id='userResult'>{{name.username}}</span>
+        <span><md-button class="md-warn md-raised md-hue-2">Add Friend</md-button><span>
+        </div>
+      </span>
   </md-toolbar>
   <md-content layout-padding ng-controller="LeftCtrl">
     <ul ng-controller = 'dashboardCtrl' >
