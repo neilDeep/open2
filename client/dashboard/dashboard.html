@@ -7,6 +7,30 @@
           <span flex></span>
           <h1 style="font-size: 30px; font-weight: bold;" class = "open" ng-click="toggleLeft()"> Open2</h1>
           <md-button class="md-warn md-raised md-hue-2" ng-click="authObj.$unauth()">logout</md-button>
+   </md-toolbar>
+</div>
+<!-- nav bar end -->
+
+<!-- userProfile -->
+<section layout="row" flex>
+  <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop md-whiteframe="4">
+  <md-toolbar class="md-theme-indigo" ng-controller="LeftCtrl">
+     <h3 class='open' ng-click="close()">{{info[0].username}}</h3>
+  </md-toolbar>
+
+  <br>
+    <img class="profilePic" src='../assets/default.png' alt='Profile Picture'>
+  <br>
+  <md-toolbar class="md-theme-indigo" ng-controller="LeftCtrl">
+     <h3 class= "open">Friends</h3>
+      <md-button class="md-fab" id='searchFriends' aria-label="Eat cake" ng-click="showSearchBar()">
+      <md-icon md-svg-src="../assets/search.svg"></md-icon>
+      </md-button>
+      <span ng-show="searchBarShown">
+        <span><input type="text" ng-model='userNameYouWant'></input><span>
+        <div  ng-repeat="name in userList | filter:userNameYouWant">
+        <span id='userResult'>{{name.username}}</span>
+        <span><md-button class="md-warn md-raised md-hue-2">Add Friend</md-button><span>
         </div>
       </md-toolbar>
     </div>
