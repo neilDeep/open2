@@ -1,6 +1,6 @@
 <div class="login-form">
   <h1>Open2</h1>
-  <div>Sign Up Now!</div>
+  <h4 class='open'>Sign Up Now!</h4>
   <div class="form-group" ng-controller = "signupCtrl">
     <form action="/" id="myLogin">
     <md-input-container md-no-float="" class="md-block">
@@ -9,8 +9,15 @@
     <md-input-container md-no-float="" class="md-block">
     <input type="password" name="password"ng-model="password" placeholder="Password">
     </md-input-container>
+    <md-input-container md-no-float="" class="md-block">
+    <h5 class='open'>Your Avatar!</h5>
+    <p>Accepted Files: .jpg</p>
+    <input type="file" name="pic" ng-model="pic" aria-label='profilePic'>
+    </md-input-container>
     <md-button class="md-warn md-raised md-hue-2"  ng-click="submit()" aria-label="Eat cake"> Sign Up!
     </md-button>
     </form>
   </div>
 </div>
+
+<!-- accept="image/*" -->
