@@ -10,7 +10,7 @@ angular.module('dashboard-module', ['firebase'])
     $scope.authObj.$onAuth(function(authData) {
       if (authData) {
         $scope.uid = authData.auth.uid;
-          $scope.getFriends($scope.uid);
+        $scope.getFriends($scope.uid);
 
         Services.uploadUserProfile($scope.uid)
         .then(function(data){
@@ -76,23 +76,31 @@ angular.module('dashboard-module', ['firebase'])
     //end of uploading dashboard
 
 
-
     //chat functionality
+    $scope.showChat = false;
+
+    $scope.displayChat = function() {
+      console.log($scope.showChat + "is now");
+      if($scope.showChat === false) {
+        $scope.showChat = true;
+        $scope.clearChat();
+      } else {
+        $scope.showChat = false;
+      }
+    };
+
     $scope.messages = $firebaseArray($scope.ref);
     $scope.newMessage = function(event) {
       if(event.keyCode === 13 && $scope.msg) {
-        var name = $scope.info[0].username;
-        $scope.messages.$add({from: name, body: $scope.msg});
+        var username = $scope.info[0].username;
+        $scope.messages.$add({from: username, body: $scope.msg});
         $scope.msg = "";
       }
     }
 
-
-
-
-
-
-
+    $scope.clearChat = function(){
+      $scope.ref.remove();
+    }
 
     // join or unjoin event
 
@@ -128,29 +136,29 @@ angular.module('dashboard-module', ['firebase'])
 
 
     $scope.addFriend = function(username){
-    Services.addFriend($scope.uid, username).then(function(usernames){
+      Services.addFriend($scope.uid, username).then(function(usernames){
 
-          alert("you added " + username);
-$state.reload();
+        alert("you added " + username);
+        $state.reload();
 
 
       })
     }
-    
+
 
     $scope.myFriends = [];
     $scope.getFriends = function(uid){
       Services.getFriends(uid).then(function(friends){
 
-          console.log("hi")
-         friends.data.forEach(function(name){
+        console.log("hi")
+        friends.data.forEach(function(name){
           $scope.myFriends.push(name);
-         })
-         console.log("my Friends", $scope.myFriends)
+        })
+        console.log("my Friends", $scope.myFriends)
       })
     }
-  
-  $scope.checkAuthentication();
+
+    $scope.checkAuthentication();
 
 
     $scope.searchBarShown = false;
@@ -198,7 +206,7 @@ $state.reload();
       Services.eventsPost(eventInfo)
       .then(function(respData){
         //console.log('i got this back from server/database', respData);
-          console.log("addEvent Promiss returning", respData);
+        console.log("addEvent Promiss returning", respData);
       });
     };
   });
